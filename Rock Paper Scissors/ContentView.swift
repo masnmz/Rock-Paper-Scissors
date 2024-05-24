@@ -18,17 +18,39 @@ struct ContentView: View {
     
     var body: some View {
         Text("Computers choice is: \(listOfChoices[computerChoice])")
+            .padding()
+            .frame(minWidth: 100, maxWidth: .infinity)
+            .background(.blue)
+            .cornerRadius(10)
+        
         Text("Your aim to \(winOrLose[winLose])")
+            .padding()
+            .font(.largeTitle)
+        
         HStack(spacing: 30){
             Button("Rock"){
-                print("User Chose Rock")
+                usersChoice = "Rock"
             }
+            .padding()
+            .background(Color.red)
+            .foregroundStyle(.black)
+            .clipShape(Capsule())
+            
             Button("Paper"){
-                print("User Chose Paper")
+                usersChoice = "Paper"
             }
+            .padding()
+            .background(Color.red)
+            .foregroundStyle(.black)
+            .clipShape(Capsule())
+            
             Button("Scissors"){
-                print("User Chose Scissors")
+                usersChoice = "Scissors"
             }
+            .padding()
+            .background(Color.red)
+            .foregroundStyle(.black)
+            .clipShape(Capsule())
         }
     }
 }

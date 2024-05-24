@@ -20,58 +20,77 @@ struct ContentView: View {
     
     
     var body: some View {
-        VStack {
-            Text("UserScore: \(userScore)")
-                .padding(50)
-                .font(.largeTitle)
-            
-        }
-        Spacer()
-        Text("Computers choice is: \(listOfChoices[computerChoice])")
-            .padding()
-            .frame(minWidth: 100, maxWidth: .infinity)
-            .background(.blue)
-            .cornerRadius(10)
-        
-        Text("Your aim: To \(winOrLose[winLose])")
-            .padding()
-            .font(.largeTitle)
-        HStack(spacing: 30){
-            Button("Rock"){
-                usersChoice = "Rock"
-                result()
+        ZStack {
+            RadialGradient(colors: [.blue, .black], center: .center, startRadius: 20, endRadius: 600)
+            VStack {
+                Spacer()
+                Text("Your Score: \(userScore)")
+                    .padding(50)
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                
+                Spacer()
+                Text("Computers choice is: \(listOfChoices[computerChoice])")
+                    .padding()
+                    .frame(minWidth: 100, maxWidth: .infinity)
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .background(.black)
+                    .cornerRadius(10)
+                
+                Text("Your aim: To \(winOrLose[winLose])")
+                    .padding()
+                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                    .background(.purple)
+                    .font(.largeTitle)
+                    .cornerRadius(30)
+                Spacer()
+                
+                Text("Choose Your Move")
+                    .foregroundStyle(.white)
+                    .padding()
+                HStack(spacing: 30){
+                    Button("Rock"){
+                        usersChoice = "Rock"
+                        result()
+                    }
+                    .padding()
+                    .background(Color.red)
+                    .foregroundStyle(.white)
+                    .clipShape(Capsule())
+                    
+                    Button("Paper"){
+                        usersChoice = "Paper"
+                        result()
+                    }
+                    .padding()
+                    .background(Color.red)
+                    .foregroundStyle(.white)
+                    .clipShape(Capsule())
+                    
+                    Button("Scissors"){
+                        usersChoice = "Scissors"
+                        result()
+                    }
+                    .padding()
+                    .background(Color.red)
+                    .foregroundStyle(.white)
+                    .clipShape(Capsule())
+                }
+                Spacer()
+                
             }
-            .padding()
-            .background(Color.red)
-            .foregroundStyle(.black)
-            .clipShape(Capsule())
-            
-            Button("Paper"){
-                usersChoice = "Paper"
-                result()
+            .alert("Game Over", isPresented: $gameOver) {
+                Button("Restart") {
+                    reset()
+                }
+            }message: {
+                Text("Final Score: \(userScore)")
             }
-            .padding()
-            .background(Color.red)
-            .foregroundStyle(.black)
-            .clipShape(Capsule())
-            
-            Button("Scissors"){
-                usersChoice = "Scissors"
-                result()
-            }
-            .padding()
-            .background(Color.red)
-            .foregroundStyle(.black)
-            .clipShape(Capsule())
-        }
-        Spacer()
-        
+        }.ignoresSafeArea()
     }
-        .alert("Game is over. Your score \(userScore)", isPresented: $gameOver) {
-            Button{"Restart"} {
-                reset()
-            }
-        }
+
+        
     
     func reset() {
         gameOver = false
